@@ -1,0 +1,33 @@
+:root {
+  --grid-size: 16;
+}
+
+body {
+  background-color: rgb(241, 207, 195);
+}
+
+#header {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  padding: 20px 0px 50px 0px;
+}
+
+#title {
+  text-align: center;
+}
+
+#grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  justify-self: center;
+}
+
+.grid-square {
+  background-color: rgb(158, 157, 157);
+  border: 1px black solid;
+  flex-grow: 1;
+  flex-basis: var(--grid-size);
+  aspect-ratio: 1 / 1;
+}
