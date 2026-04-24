@@ -19,36 +19,19 @@ function createGrid(number = 16) {
 
   console.log("Input is: " + number);
 
-  let totalSquares = number * number;
-  let pctFlexBasis = 0;
-  console.log("grid square: " + pctFlexBasis);
+  for (i = 0; i < number; i++) {
+    const etchColumn = document.createElement("div");
 
-  pctFlexBasis = number + 1;
-  console.log("grid square: " + pctFlexBasis);
+    grid.appendChild(etchColumn);
+    etchColumn.setAttribute("class", "grid-column");
 
-  pctFlexBasis = 100 / pctFlexBasis;
-  console.log("grid square: " + pctFlexBasis);
+    for (j = 0; j < number; j++) {
+      const etchRow = document.createElement("div");
 
-  //   pctFlexBasis = Math.round(pctFlexBasis);
-  //   console.log("grid square: " + pctFlexBasis);
-
-  pctFlexBasis = pctFlexBasis + "%";
-  console.log("grid square: " + pctFlexBasis);
-
-  console.log("Total grid size: " + totalSquares);
-
-  for (i = 0; i < totalSquares; i++) {
-    const etchSquare = document.createElement("div");
-    grid.appendChild(etchSquare);
-    etchSquare.setAttribute("class", "grid-square");
-    etchSquare.textContent = i + 1;
+      etchColumn.appendChild(etchRow);
+      etchRow.setAttribute("class", "grid-row");
+    }
   }
-
-  root.style.setProperty("--grid-size", pctFlexBasis);
-  console.log(
-    "The value of --grid-size is: " +
-      rootStyles.getPropertyValue("--grid-size"),
-  );
 
   return console.log("Grid created.");
 }
