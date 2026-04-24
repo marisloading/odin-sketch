@@ -7,7 +7,9 @@ const numberInput = document.querySelector("#grid-size");
 createGrid(16);
 
 generateGridBtn.addEventListener("click", () => {
-  createGrid(numberInput.value);
+  if (window.confirm("Are you sure, this will delete the current grid?")) {
+    createGrid(numberInput.value);
+  }
 });
 
 function createGrid(number = 16) {
@@ -30,8 +32,47 @@ function createGrid(number = 16) {
 
       etchColumn.appendChild(etchRow);
       etchRow.setAttribute("class", "grid-row");
+      etchRow.addEventListener("mouseover", (event) => {
+        const targetSquare = getComputedStyle(event.target);
+
+        if (targetSquare.filter === "saturate(0)") {
+          console.log("Target square is empty: True");
+
+          event.target.style.backgroundColor = getRandomColor();
+          event.target.style.filter = "saturate(0.1)";
+        } else {
+          let currentSaturation = targetSquare.filter;
+
+          console.log(currentSaturation);
+
+          currentSaturation = parseFloat(
+            currentSaturation.replace("saturate(", ""),
+          );
+
+          console.log(currentSaturation);
+
+          if (currentSaturation < 1) {
+            currentSaturation += 0.1;
+          }
+
+          currentSaturation = `saturate(${currentSaturation})`;
+
+          console.log(currentSaturation);
+
+          event.target.style.filter = currentSaturation;
+        }
+      });
     }
   }
 
   return console.log("Grid created.");
+}
+
+function getRandomColor() {
+  const letters = "0123456789ABCDEF";
+  let color = "#";
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
